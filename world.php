@@ -7,7 +7,14 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
 
-$stmt = $conn->query("SELECT * FROM countries");
+if(isset($_GET['country'])){
+    $country = $_GET['country'];
+    $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%';");
+} else if($_GET['all']=="true"){
+    $stmt = $conn->query("SELECT * FROM countries");
+} else {
+    exit();
+}
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
