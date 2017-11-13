@@ -2,28 +2,29 @@
 
 $(document).ready(function(){
   $('#lookup').click(function(){
-    $.ajax({
-      type: 'GET',
-      url: 'world.php?' ,
-      data:  {country: $('#country').val()},
-      success :function(response){
-        $('#result').html(response);
-        
-      }
-    });
-  });
-   /*$('#lookup').click(function(){   
-        if ($('.all').is(':checked',true)){
-        $.ajax({
-            type: 'GET',
-            url: 'world.php?' ,
-            data:  {country: $('#checkbox').checked()},
-            success :function(response){
-            $('#result').html(response);
+    if($("#checkbox")[0].checked){
+      $.ajax({
+        type: 'GET',
+        url: 'world.php?' ,
+        data:  {all: 'true'},
+        success :function(response){
+          $('#result').html(response);
+          
         }
-         });
-      }
-  });*/
+      });
+    }else{
+      $.ajax({
+        type: 'GET',
+        url: 'world.php?' ,
+        data:  {country: $('#country').val()},
+        success :function(response){
+          $('#result').html(response);
+          
+        }
+      });
+    }
+  });
+  
 })
 
 
